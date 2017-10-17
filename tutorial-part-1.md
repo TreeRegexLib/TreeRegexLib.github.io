@@ -1,29 +1,74 @@
 ---
-title: Tutorial Overview
+title: Tutorial Part 1
 layout: default
 ---
-This tutorial teaches you all you need to know about TreeRegex source code modification.  The tutorial is broken into three parts:
 
-- Part 1 discuses what TreeRegex expressions and replacement strings are and how to use them for simple instrumentation
-- Part 2 discusses Transformers and how to use TreeRegex's for more complicated instrumentation
-- Part 3 discusses using ANTLR grammars with TreeRegex and using TreeRegex expressions to evaluate a language
+# Simple Instrumentation
+## Instrumenting JavaScript Conditions
+To understand TreeRegex expressions, let us work through a quick example - instrumenting the conditions in a JavaScript test file.  This tutorial should take about 5-10 minutes.
 
-Throughout this tutorial we will be using the TreeRegex implementation available here [TreeRegex Download][1].  If you have not downloaded and compiled/installed TreeRegex, please first review [TreeRegex: How to Install][2]
+If you have not downloaded and compiled/installed TreeRegex, please do so now via the directions [here](download.md).
 
-### What is a TreeRegex?
-TODO: fix up TreeRegex stands for, serialized expressions
-Simply put, a TreeRegex, or a TreeRegex pattern, is a pattern describing a tree of text.  The name TreeRegex stands for Structured Tree Regex - a regular expression-like language over structured text, the structure of which are trees.  A [tree][3], for the purposes of TreeRegex, is either a list of sub-trees or a string.
+### Creating a test file
+In order to instrument a JavaScript test file, we first need a JavaScript test file.  Open up your favorite text editor and create a `test.js` file with the following content:
 
-Similarly, a TreeRegex pattern can be thought of as a tree of [regular expressions][4].  If you are not familiar with regular expressions, I recommend reading the tutorial [here][5] before continuing.
+~~~~
+if(Math.random() > 0.5){
+    if(Math.random() > 0.8){
+        console.log("0.5*0.2 chance!");
+    } else {
+        console.log("0.5*0.8 chance!");
+    }
+} else {
+    console.log("0.5 chance!");
+}
+~~~~
 
-Any regular expression (once escaped) is a valid TreeRegex pattern.  For instance `.*` matches any tree that is just a string.  TreeRegex augments regular expressions by letting you specify the height (or depth) of the string in the tree.  For instance, if you wanted to find a tree that has one child and that child is any string, you would write the TreeRegex `(%.*%)`.  In TreeRegex patterns and trees, we use `(%` and `%)` to deliminate subtrees.
+This file contains code that picks some random numbers and takes branches depending on those numbers.
 
-A TreeRegex tree is only made up of plain text and `(%` and `%)`, but a TreeRegex pattern has further metacharacters.  A TreeRegex pattern can also contain a `@` which matches any immediate subtree or `(*` and `*)` which matches a subtree, even if it is not an immediate subtree.  These are explained in *Instrumenting JavaScript Conditions* below.
+To run this code, we can use `node`:
 
-### What is a Replacement String
-While TreeRegex patterns provide a means of matching trees, it is of little use without the ability to modify those trees.  Similar to regular expressions, TreeRegex replacment strings specify what to replace a matched tree with.  These will also be trees.
+    node test.js
 
-TreeRegex replacement strings are trees that can have special metacharaters to represent captured values from the TreeRegex pattern.  These are a dollar sign ($) followed by a single digit (similar to some regular expression replacement string formats).
+This should print out the probability of the path taken.  Otherwise, either `node` is not installed (which is necessary for this tutorial) or there is an error in the JavaScript file.
 
-A simple replacement string could just be `Tree`, while a more complicated one may be `(%Tree: $1%)`.  These are further explained in the next section.
+### Changing a test file into a Tree
 
+The first step of using TreeRegex is adding the structure to the text - we can use an existing parser for this.  After following the install commands in the `frontend/js` folder, run the command:
+
+    node js_to_sexp.js <path to test.js>
+
+This will print out the structured text into `test.js.sexp`.  Here we can see the form of the if-statements we want to instrument.  For example, here is the part of the first if-statement that we want to instrument (with the body ellided for brevity):
+
+    (%if((%(%(%(%Math%).(%random%)%)()%) > (%0.5%)%))(%{ ... }%)
+
+Any TreeRegex tree is a valid pattern that matches itself; if we used this (with body filled-in) as the pattern we could match this if-statement.  In this case, though, that is not enough.  We want to match any if-statement.  Let us look at  the other if-statement to see if we can determine the pattern we need.
+
+The second if-statement looks like:
+
+    (%if((%(%(%(%Math%).(%random%)%)()%) > (%0.8%)%))(%{ ... }%)
+
+Both if-statements look something like this:
+
+    (%if((%...%))(%...%)%)
+
+Where the `(%...%)` is some subtree.
+
+### Writing and matching Conditions with TreeRegex
+
+In TreeRegex we can either specify the entire subtree with `(%` and `%)`, we can specify some (non-immediate) subtree with `(*` and `*)`, or we can just state that a subtree is there, without requiring any particular text in it with `@`.  Because we are not looking for a particular condition or particular body, we can use `@` here to get the following pattern:
+
+    (%if(@)@%)
+
+If we only wanted conditions with `Math.random()` in them, we could use:
+
+    (%if((*Math.random()*))@%)
+
+Let us keep both of these patterns in mind while doing the next step - adding in our instrumentation.
+
+### Replacing Conditions with our instrumentation function
+
+Coming soon!
+
+## Moving on to Better Things...
+[Part 2](tutorial-part-2.md) describes how to use the *Transformer* API to combine different TreeRegex expressions for easy rewriting.
