@@ -25,6 +25,4 @@ TODO: wide image that goes from code to sexp, with matching TreeRegex expression
 
 * Reliable: One of the fundamental difficulties with making tooling for a language is that the language changes - new features or added or internal components are rearranges.  By focuses on the outer-most layers of a tool chain (the syntax itself), we are able to build tools that work for different versions of the language and different versions of the underlying tool chain (e.g., different versions of clang, even as the API is adjusted).
 
-If you want to learn more, continue to the [Tutorial]
-
-[Tutorial](tutorial-overview.md)
+If you want to learn more, continue to the [Tutorial](tutorial-overview.md)
