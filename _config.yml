@@ -1,3 +1,3 @@
 theme: jekyll-theme-slate
 title: TreeRegexLib
-description: TreeRegexLib is an implementation of the TreeRegex language for rewriting tree-based structures (e.g. source code) in a regex-like way.
+description: Rewriting source code made regex-y
