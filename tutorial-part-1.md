@@ -1,6 +1,6 @@
 ---
 title: Tutorial Overview
-layout: page
+layout: default
 ---
 This tutorial teaches you all you need to know about TreeRegex source code modification.  The tutorial is broken into three parts:
 

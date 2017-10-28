@@ -1,6 +1,6 @@
 ---
 title: Tutorial Part 3
-layout: page
+layout: default
 ---
 
 # Using a Custom Grammar and Evaluating a Language

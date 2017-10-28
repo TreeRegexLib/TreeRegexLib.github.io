@@ -1,6 +1,6 @@
 ---
 title: Tutorial Part 1
-layout: page
+layout: default
 ---
 
 # Simple Instrumentation

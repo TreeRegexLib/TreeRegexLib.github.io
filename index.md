@@ -1,3 +1,8 @@
+---
+title: TreeRegex
+layout: default
+---
+
 # What is TreeRegex?
 
 TreeRegex is an extension of regular expressions to handle tree-like structures in text.  Regular expressions are already a standard tool in the computer programmer's toolbox - they are a required technology to know in modern software.  Yet, they can't be used effectively with a huge class of texts: tree-structured texts.  Tree structured text includes a lot of different cases, the most prominent among them are *programming languages*, JSON, and XML-languages.  TreeRegex is designed to be used with any tree structured text and we provide tooling to get started using it in a variety of cases.  In short, we made regular expressions work on source code.  Now if you want to do a complicated refactor or find a set of instructions, you can do so using a small adjustment to a tool you already know.  *TreeRegexLib* is our reference implementation.

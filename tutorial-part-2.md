@@ -1,6 +1,6 @@
 ---
 title: Tutorial Part 2
-layout: page
+layout: default
 ---
 
 # Transformers

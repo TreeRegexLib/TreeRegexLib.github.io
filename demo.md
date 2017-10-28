@@ -1,6 +1,6 @@
 ---
 title: Demo
-layout: page
+layout: default
 ---
 
 This page gives a brief demo of using TreeRegex.

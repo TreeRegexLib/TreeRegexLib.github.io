@@ -1,6 +1,6 @@
 ---
 title: About
-layout: page
+layout: default
 ---
 
 Regular expressions are a special

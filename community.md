@@ -1,6 +1,6 @@
 ---
 title: Community
-layout: page
+layout: default
 ---
 
 ## Emailing List
