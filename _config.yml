@@ -1,3 +1,7 @@
-theme: jekyll-theme-slate
-title: TreeRegexLib
+title: TreeRegex
 description: Rewriting source code made regex-y
+plugins:
+  - jekyll-sitemap
+exclude:
+  - Gemfile
+  - Gemfile.lock
