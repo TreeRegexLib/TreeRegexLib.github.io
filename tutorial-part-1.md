@@ -36,7 +36,7 @@ This should print out the probability of the path taken.  Otherwise, either `nod
 
 The first step of using TreeRegex is adding the structure to the text - we can use an existing parser for this.  After following the install commands in the `frontend/js` folder, run the command:
 
-    node js_to_sexp.js <path to test.js>
+    node js_to_sexp.js path_to_test.js
 
 This will print out the structured text into `test.js.sexp`.  Here we can see the form of the if-statements we want to instrument.  For example, here is the part of the first if-statement that we want to instrument (with the body ellided for brevity):
 
@@ -60,6 +60,12 @@ In TreeRegex we can either specify the entire subtree with `(%` and `%)`, we can
 
     (%if(@)@%)
 
+We can test this pattern using the `tsearch` binary like so:
+
+~~~~
+tsearch `(%if(@)@%)`  < path_to_test.js.sexp
+~~~~
+
 If we only wanted conditions with `Math.random()` in them, we could use:
 
     (%if((*Math.random()*))@%)
@@ -68,7 +74,27 @@ Let us keep both of these patterns in mind while doing the next step - adding in
 
 ### Replacing Conditions with our instrumentation function
 
-Coming soon!
+Now that we are able to match each of the if-statements, we might want to log what path is taken.  To do this, we are going to use the `logBranch` function.  This function takes a single argument - whether or not the branch is taken - and prints it to the screen.
+
+We can define it as follows:
+
+~~~~
+var n = 0;
+function logBranch(v){
+	console.log("Branch " + n + " is taken?: " + v);
+	n++;
+}
+~~~~
+
+Now, we want to insert this function into each if-statement.  To do this, we take our matching pattern to find each of the if statements and then we replace them with a replacement string.  A replacement string in TreeRegex works similar to a replacement string in regular expressions - `$n` values are replaced with captures.  On top of using parentheses to capture values, TreeRegex `@` expressions also capture the strings they match.  This makes the necessary replacement string simple to use:
+
+We want to match with `(%if(@)@%)` and replace with `(%if(logBranch($1))$2%)`.
+
+To test this, we can use the `treplace` program like follows:
+
+~~~~
+treplace `(%if(@)@%)` `(%if(logBranch($1))$2%)` < path_to_test.js.sexp
+~~~~
 
 ## Moving on to Better Things...
-[Part 2](tutorial-part-2.md) describes how to use the *Transformer* API to combine different TreeRegex expressions for easy rewriting.
+~~[Part 2](tutorial-part-2.md) describes how to use the *Transformer* API to combine different TreeRegex expressions for easy rewriting.~~ *Coming Soon!*

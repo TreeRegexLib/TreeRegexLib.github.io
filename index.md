@@ -16,14 +16,15 @@ TreeRegex is an extension of regular expressions to handle tree-like structures 
 ## How does it work?
 <!--A Taste of TreeRegex-->
 
+<!--![Diagram of TreeRegex Workflow](/public/diagram_2.png =1000x)-->
+<img src="/public/diagram_2.png" style="width: 1000px;"/>
+
 Using TreeRegex requires four steps:
 
 1. Run a frontend to add markers - we provide a variety already, including for C/C++ and Python source code.
 2. Write and run a TreeRegex on the annotated text.  The TreeRegex can perform find (and replace) tasks.
 3. De-structure it back into text.
 4. Profit!
-
-<!--TODO: wide image that goes from code to sexp, with matching TreeRegex expression-->
 
 # Benefits
 

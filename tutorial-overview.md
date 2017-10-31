@@ -5,8 +5,8 @@ layout: page
 This tutorial teaches you all you need to know about TreeRegex source code modification.  The tutorial is broken into three parts:
 
 - [Part 1](tutorial-part-1.md) discuses what TreeRegex expressions and replacement strings are and how to use them for simple instrumentation
-- [Part 2](tutorial-part-2.md) discusses Transformers and how to use TreeRegex's for more complicated instrumentation
-- [Part 3](tutorial-part-3.md) discusses using ANTLR grammars with TreeRegex and using TreeRegex expressions to evaluate a language
+- ~~[Part 2](tutorial-part-2.md) discusses Transformers and how to use TreeRegex's for more complicated instrumentation~~ *Coming Soon!*
+- ~~[Part 3](tutorial-part-3.md) discusses using ANTLR grammars with TreeRegex and using TreeRegex expressions to evaluate a language~~ *Coming Soon!*
 
 Throughout this tutorial we will be using the TreeRegex implementation available [here](download.md).  <!--If you have not downloaded and compiled/installed TreeRegex, please first review [TreeRegex: How to Install][2]-->
 

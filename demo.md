@@ -1,6 +1,7 @@
 ---
 title: Demo
 layout: page
+published: false
 ---
 
 Coming soon!
