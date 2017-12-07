@@ -9,5 +9,6 @@ To use TreeRegex you need two applications: a frontend to convert source code (o
 
 To download an implementation, see our repos here:
 * [C++ Library + CLI Tools](https://github.com/TreeRegexLib/treeregexlib_cpp)
-* ~~Java Library~~ *Coming Soon!*
-* ~~JS Library~~ *Coming Soon!*
+* Other versions coming soon!
+<!--* ~~Java Library~~ *Coming Soon!*-->
+<!--* ~~JS Library~~ *Coming Soon!*-->

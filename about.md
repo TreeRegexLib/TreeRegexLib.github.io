@@ -26,6 +26,6 @@ nested blocks.
 
 
 # TreeRegex-->
-Researchers at UC Berkeley created TreeRegex to explore techniques which can serve as a regular expression-like tool for tree-structured texts.
-The goal is to create a language that is as easy to write as regular expressions, but powerful enough for tasks like matching and transforming source code.
-We have already implemented a prototype towards this end, called TreeRegexLib.  This prototype was initially developed as a means of easily instrumenting source code (which has tree-like structure).  During the development of TreeRegex, we realized that the tool could be used for other tasks and did preliminary exploration for using TreeRegex for linting and compilation.  We hope to further strengthen the expressive power of TreeRegex through additions to the language and apply TreeRegex to a series of applications.
+Researchers at UC Berkeley created TreeRegex to make quick source code analysis easy.  It was created to use syntax that most developers already know - regular expressions - and to be applicable to artifacts that developers create - source code (which is a tree-structured text).
+<!--The goal is to create a language that is as easy to write as regular expressions, but powerful enough for tasks like matching and transforming source code.-->
+TreeRegexLib is a prototype towards this end.  This prototype was initially developed as a means of easily instrumenting source code.  During the development of TreeRegex, we realized that the tool could be used for other tasks and did preliminary exploration for using TreeRegex for linting and compilation.  We hope to further strengthen the expressive power of TreeRegex through additions to the language and apply TreeRegex to a series of applications.
